@@ -1,14 +1,28 @@
-from __future__ import unicode_literals
-
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class Project(models.Model):
-    name = models.CharField(_(u'name'), max_length=255)
-    description = models.TextField(_(u'description'))
-    duration = models.DurationField(_(u'duration'))
-    avatar = models.ImageField(_(u'avatar'), upload_to='projects/avatars/%Y/%m/', blank=True)
+    title = models.CharField('project title', max_length=50)
+    description = models.TextField('description', blank=True, null=True)
+    deadline = models.DateField('deadline')
+    image = models.ImageField(upload_to='projects_avatars', blank=True,
+                              null=True)
 
     def __str__(self):
-        return self.name
+        return self.title
+
+
+class Task(models.Model):
+    title = models.CharField('task title', max_length=50)
+    description = models.TextField('description', blank=True, null=True)
+    start_date = models.DateField('start date')
+    end_date = models.DateField('end date')
+    project = models.ForeignKey('Project', related_name='tasks', blank=True,
+                                null=True, on_delete=models.CASCADE)
+    task = models.ForeignKey(
+        'self', related_name='subtasks', blank=True, null=True)
+    user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+
+    def __str__(self):
+        return self.title

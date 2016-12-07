@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PyCharm
 .idea/
 
@@ -78,4 +77,3 @@ target/
 */__pycache__/
 npm-debug.log
 *.db
->>>>>>> 1c4abe9792c1156e4b4892f635308c49542450b6
