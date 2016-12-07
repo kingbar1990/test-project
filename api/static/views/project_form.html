@@ -1,0 +1,26 @@
+<div class="row">
+    <form class="col l6 offset-l3">
+    <div class="input-field">
+        <input class="validate" placeholder="Project Title" type="text" ng-model="project.title">
+        <textarea placeholder="Description" rows="10" id="textarea1" class="materialize-textarea" ng-model="project.description"></textarea>
+        <input type="text" placeholder="Enter Date" class="datepicker" ng-model="project.deadline">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" file-input="files" ng-model="project.image">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" placeholder="Upload project avatar" type="text">
+          </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <button class="btn" type="submit" ng-click="process(project)">Save</button>
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+   $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+   });
+</script>

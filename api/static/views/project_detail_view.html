@@ -1,0 +1,22 @@
+<div class="row">
+    <h3>{{ project.title }}</h3>
+    <div style="margin-top:20px;">
+        <img class="col s5" ng-src="{{ project.image }}">
+        <div class="col s6 offset-s1">
+            <span>{{ project.description }}</span>
+            <div class="col s12" style="margin-top:10px; margin-bottom: 10px;">
+                <a ng-href="#project/{{ project.id }}/task/add" class="waves-effect waves-light btn">
+                  Add Task
+                </a>
+            </div>
+
+            <ul class="collection" ng-if="tasks.length">
+              <li ng-repeat="task in tasks" class="collection-item">
+                <a ng-href="#/project/{{ project.id }}/task/{{ task.id }}" >{{ task.title }}</a>
+                <a href="" ng-click="deleteTask(task)" class="right"><i class="material-icons">delete</i></a>
+                <a href="#/project/{{ project.id }}/task/{{ task.id }}/edit" class="right"><i class="material-icons">edit</i></a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</div>

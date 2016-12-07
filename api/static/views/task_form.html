@@ -1,0 +1,27 @@
+<div class="row">
+    <form class="col l6 offset-l3" enctype="multipart/form-data">
+    <div class="input-field">
+        <input class="validate" placeholder="Task Title" type="text" ng-model="task.title">
+        <textarea placeholder="Description" rows="10" id="textarea1" class="materialize-textarea" ng-model="task.description"></textarea>
+        <input type="text" placeholder="Start Date" class="col s6 datepicker" ng-model="task.start_date">
+        <input type="text" placeholder="End Date" class="col s6 datepicker" ng-model="task.end_date">
+         <div class="col s12">
+        <select ng-options="user as user.username for user in users track by user.id" ng-model="selected" multiple></select>
+        </div>
+
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <button class="btn" type="submit" ng-click="process(task)">Save</button>
+    </div>
+    </form>
+</div>
+
+<script ng-if="users_loaded" type="text/javascript">
+  $('select').material_select();
+</script>
+<script type="text/javascript">
+   $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+   });
+
+</script>

@@ -1,0 +1,83 @@
+<div class="row">
+    <h3>{{ task.title }}</h3>
+    <div class="col s12" style="margin-bottom: 20px;">{{ task.description }}</div>
+
+    <div ng-if="assigned_users.length">
+      <h5 style="margin-top:10px">Assigned users</h5>
+      <div class="col s4">
+        <ul class="collection">
+          <li ng-repeat="user in assigned_users" class="collection-item" ng-bind="user.username"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col s12" style="margin-top:10px">
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-button btn' constrainwidth="false" href='' data-activates='dropdown2'>Assign user</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown2' class='dropdown-content'>
+          <li ng-repeat="user in users" ng-click="assignUser(user)"><a ng-bind="user.username" href=""></a></li>
+        </ul>
+    </div>
+
+    <div class="col s12" style="margin-top:10px">
+        <a class="waves-effect waves-light btn" data-target="modal2" ng-click="setAdd()">
+          Add Subtask
+        </a>
+    </div>
+    <div class="col s4">
+    <ul class="collapsible" data-collapsible="expandable" ng-show="subtasks.length">
+      <li ng-repeat="subtask in subtasks">
+        <div class="collapsible-header">
+          <span>{{ subtask.title }}</span>
+          <a href="" ng-click="deleteSubtask(subtask)" class="right"><i class="material-icons">delete</i></a>
+          <a href="" data-target="modal2" ng-click="setSubtask($index)" class="right"><i class="material-icons">edit</i></a>
+        </div>
+        <div class="collapsible-body"><p>{{ subtask.description }}</p></div>
+      </li>
+    </ul>
+    </div>
+
+  <!-- Modal Structure -->
+  <div id="modal2" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Subtask</h4>
+      <div class="row">
+            <form class="col l6 offset-l3">
+              <div class="input-field">
+                  <input class="validate" placeholder="Task Title" type="text" ng-model="subtask.title">
+                  <textarea placeholder="Description" rows="10" id="textarea1" class="materialize-textarea" ng-model="subtask.description"></textarea>
+                  <input type="text" placeholder="Start Date" class="col s6 datepicker" ng-model="subtask.start_date">
+                  <input type="text" placeholder="End Date" class="col s6 datepicker" ng-model="subtask.end_date">
+              </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <span ng-show="edit">
+        <button class="btn save" type="submit" ng-click="editSubtask(subtask)">Save</button>
+      </span>
+      <span ng-show="!edit">
+        <button class="btn save" type="submit" ng-click="addSubtask(subtask)">Save</button>
+      </span>
+    </div>
+  </div>
+  <!-- End Modal -->
+</div>
+<script>
+  $('.collapsible').collapsible();
+  $('.modal').modal();
+  $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+   });
+
+  $('.dropdown-button').dropdown({
+    constrain_width: false, // Does not change width of dropdown to that of the activator
+    hover: true, // Activate on hover
+  });
+
+  $('.save').click(function(){
+    $('#modal2').modal('close');
+  });
+</script>

@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+    <!-- My -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body ng-app="App" ng-cloak ng-controller="MainPageController">
+<div class="container">
+<!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Login</h4>
+      <div class="row">
+            <form class="col l6 offset-l3">
+              <div class="input-field">
+                  <input placeholder="Username" class="validate" type="text" ng-model="user.name">
+                  <input placeholder="Password" class="validate" type="password" ng-model="user.password">
+              </div>
+              <div class="row" style="margin-top: 30px;">
+
+              </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a href="" ng-click="login(user)" class="modal-action modal-close waves-effect waves-green btn-flat ">Login</a>
+    </div>
+  </div>
+    <!-- End Modal Structure -->
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a style="margin-left:10px" href="#/" class="breadcrumb">Home</a>
+        <ul class="right hide-on-med-and-down">
+            <li ng-show="username">
+                <!-- Dropdown Trigger -->
+                  <a data-target="modal1" class='dropdown-button btn' constrainwidth="false" href='#' data-activates='dropdown1' ng-bind="username"></a>
+
+                  <!-- Dropdown Structure -->
+                  <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#add">Add Project</a></li>
+                    <li><a ng-click="logout()" href="#/">Logout</a></li>
+                  </ul>
+            </li>
+              <li ng-show="!username"><a data-target="modal1"  class="waves-effect waves-light btn" href="">login</a></li>
+              <li ng-show="!username"><a href="#register" class="waves-effect waves-light btn" href="">register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    {% verbatim %}
+        <div ng-view></div>
+    {% endverbatim %}
+</div>
+
+<!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+<!-- My Scripts -->
+    <script src="{% static 'js/app.module.js' %}"></script>
+    <script src="{% static 'js/app.config.js' %}"></script>
+    <script src="{% static 'js/services/app.service.js' %}"></script>
+    <script src="{% static 'js/services/user.service.js' %}"></script>
+    <script src="{% static 'js/directives/fileInput.directive.js' %}"></script>
+    <script src="{% static 'js/directives/confirmpassword.directive.js' %}"></script>
+    <script src="{% static 'js/controllers/ListViewController.js' %}"></script>
+    <script src="{% static 'js/controllers/ProjectDetailViewController.js' %}"></script>
+    <script src="{% static 'js/controllers/AddProjectController.js' %}"></script>
+    <script src="{% static 'js/controllers/EditProjectController.js' %}"></script>
+    <script src="{% static 'js/controllers/AddTaskController.js' %}"></script>
+    <script src="{% static 'js/controllers/EditTaskController.js' %}"></script>
+    <script src="{% static 'js/controllers/TaskDetailViewController.js' %}"></script>
+    <script src="{% static 'js/controllers/MainPageController.js' %}"></script>
+    <script src="{% static 'js/controllers/RegisterController.js' %}"></script>
+
+    <script>
+        $('.dropdown-button').dropdown({
+          constrain_width: false, // Does not change width of dropdown to that of the activator
+          hover: true, // Activate on hover
+        });
+
+        $('.modal').modal();
+        $('.save').click(function(){
+          $('#modal1').modal('close');
+        });
+    </script>
+</body>
+</html>

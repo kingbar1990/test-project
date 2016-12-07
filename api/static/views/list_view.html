@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col s4" ng-repeat="project in projects">
+    <div class="card card-panel hoverable">
+      <div class="card-image">
+        <img class="responsive-image" ng-src="{{ project.image }}">
+      </div>
+      <div class="card-content">
+        <h5>{{ project.title }}</h5>
+        <p>{{ project.description | limitTo:200 }}...</p>
+      </div>
+      <div class="card-action">
+        <a ng-href="#project/{{ project.id }}">More</a>
+        <a href="" ng-click="deleteProject(project)" class="right"><i class="material-icons">delete</i></a>
+        <a href="#/project/{{ project.id }}/edit" class="right"><i class="material-icons">edit</i></a>
+      </div>
+    </div>
+  </div>
+</div>

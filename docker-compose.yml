@@ -1,0 +1,10 @@
+ version: '2'
+ services:
+  web:
+    build: .
+    # command: bash
+    command: bash start.sh
+    volumes:
+      - .:/code
+    ports:
+    - "8000:8000"

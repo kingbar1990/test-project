@@ -1,0 +1,17 @@
+<div>
+    <form class="col-sm-6 col-sm-offset-3">
+        <div class="form-group">
+            <input class="form-control" placeholder="Project Title" type="text" ng-model="project.title">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="10" placeholder="Description" ng-model="project.description"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control" id="datepicker">
+        </div>
+        <div class="form-group">
+            <input type="file" file-input="files" />
+        </div>
+        <button class="btn btn-primary" type="submit" ng-click="process(project)">Save</button>
+    </form>
+</div>
